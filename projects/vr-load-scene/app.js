@@ -25,6 +25,8 @@ class App {
         // 0x is the prefix to denote a Hexadecimal value.
         this.scene.background = new THREE.Color(0xFFFFFF);
 
+     
+
         // LIGHTING
         // Create an ambient light and add it to the scene.
         // Parameters: Sky color, Ground color, intensity
@@ -40,6 +42,9 @@ class App {
         light.position.set(1, 1, 1).normalize();
         this.scene.add(light);
 
+
+        /*
+         
         // OBJECTS
         // Define a Box Geometry
         const geometry = new THREE.BoxBufferGeometry();
@@ -51,6 +56,8 @@ class App {
         this.mesh.position.set(0, 1, -3);
         // Add the mesh to the scene
         this.scene.add(this.mesh);
+
+        */
 
         /*
          *   CAMERA
@@ -94,7 +101,7 @@ class App {
          */
 
         // Initialize Scene from JSON
-        // this.initScene();
+        this.initScene();
 
         this.setupXR();
 
@@ -149,7 +156,7 @@ class App {
 
         loader.load(
             // Enter the name of the file here
-            "ENTER-NAME-HERE.json",
+            "random.json",
 
             // onLoad callback
             // Here the loaded data is assumed to be an object

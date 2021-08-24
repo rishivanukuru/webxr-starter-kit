@@ -39,15 +39,15 @@ class App {
 
         // OBJECTS
         // Define a Box Geometry
-        const geometry = new THREE.BoxBufferGeometry();
+        // const geometry = new THREE.BoxBufferGeometry();
         // Define a basic material with color Red
-        const material = new THREE.MeshStandardMaterial({ color: 0x00FF00 });
+        // const material = new THREE.MeshStandardMaterial({ color: 0x00FF00 });
         // Create a new mesh using the geometry and material
-        this.mesh = new THREE.Mesh(geometry, material);
+        // this.mesh = new THREE.Mesh(geometry, material);
         // Move the mesh to a new position
-        this.mesh.position.set(0, 1, -3);
+        // this.mesh.position.set(0, 1, -3);
         // Add the mesh to the scene
-        this.scene.add(this.mesh);
+        // this.scene.add(this.mesh);
 
         
 
@@ -106,8 +106,8 @@ class App {
         // Creates a loading bar
         // this.loadingBar = new LoadingBar();
         // Starts the loaders        
-        this.loadSceneFromJSON();
-        // this.loadGLTF();
+        // this.loadSceneFromJSON();
+        this.loadGLTF();
 
     }
 
@@ -188,21 +188,21 @@ class App {
     loadGLTF(){
 
         // Set asset path
-        const loader = new GLTFLoader( ).setPath('../../assets/gltf/space/');
+        const loader = new GLTFLoader( ).setPath('../../assets/gltf/cube-room/');
         const self = this;
 		
 		// Load a glTF resource
 		loader.load(
 
 			// resource URL
-			"space.gltf",
+			"cube-room.gltf",
 			// called when the resource is loaded
 			function ( gltf ) {
                 
                 self.space = gltf.scene;
 
                 // gltf.scene.position.set(0,0,0);
-                gltf.scene.scale.set(0.1,0.1,0.1);
+                // gltf.scene.scale.set(0.1,0.1,0.1);
                 
 				self.scene.add( gltf.scene );
                 

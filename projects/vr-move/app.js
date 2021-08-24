@@ -228,7 +228,7 @@ class App {
 
         loader.load(
             // Enter the name of the file here
-            "testscene.json",
+            "random.json",
 
             // onLoad callback
             // Here the loaded data is assumed to be an object

@@ -19,7 +19,7 @@ class App{
 		this.scene = new THREE.Scene();
         // Set the scene background color to a grey value.
         // 0x is the prefix to denote a Hexadecimal value.
-        this.scene.background = new THREE.Color( 0xFFFFFF );
+        this.scene.background = new THREE.Color( 0x00000 );
 
         // LIGHTING
         // Create an ambient light and add it to the scene.
@@ -38,9 +38,9 @@ class App{
 
         // OBJECTS
         // Define a Box Geometry
-        const geometry = new THREE.BoxBufferGeometry();
+        const geometry = new THREE.CylinderBufferGeometry();
         // Define a basic material with color Red
-        const material = new THREE.MeshStandardMaterial( { color: 0x00FF00 });
+        const material = new THREE.MeshPhongMaterial( { color: 0xff0000 });
         // Create a new mesh using the geometry and material
         this.mesh = new THREE.Mesh( geometry, material );
         // Move the mesh to a new position
