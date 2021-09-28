@@ -49,8 +49,6 @@ class App {
         // Add the mesh to the scene
         // this.scene.add(this.mesh);
 
-        
-
         /*
          *   CAMERA
          */
@@ -74,7 +72,6 @@ class App {
 
         // Add the renderer to the initial container that will display on the HTML page
         container.appendChild(this.renderer.domElement);
-
 
         /*
         *   ADDITIONAL TOOLS
@@ -103,10 +100,8 @@ class App {
     }
 
     initScene() {
-        // Creates a loading bar
-        // this.loadingBar = new LoadingBar();
-        // Starts the loaders        
-        // this.loadSceneFromJSON();
+
+        // All the steps that need to be done for the scene to start are included here.
         this.loadGLTF();
 
     }
@@ -137,72 +132,28 @@ class App {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
-    // Load Scene from JSON
-    // Create a scene over at three.js/editor
-    // And export the scene as a JSON
-    loadSceneFromJSON() {
-
-        // Set the path of the folder containing the assets
-        const loader = new THREE.ObjectLoader().setPath('../../assets/json/');;
-
-        // Set a reference to the current app
-        const self = this;
-
-        loader.load(
-            // Enter the name of the file here
-            "testscene.json",
-
-            // onLoad callback
-            // Here the loaded data is assumed to be an object
-            function (obj) {
-
-                self.jsonscene = obj;
-
-                // obj.position.set(0,1,-3);
-                // obj.scale.set(1,1,1);
-
-                // Add the object to the scene
-                self.scene.add(obj);
-
-                // Disable the loading bar
-                // self.loadingBar.visible = false;
-
-                self.setupXR();
-
-            },
-
-            // onProgress callback
-            function (xhr) {
-                // XHR gives us an estimate of the loading progress
-                // self.loadingBar.progress = (xhr.loaded / xhr.total);
-            },
-
-            // onError callback
-            function (err) {
-                console.error('An error happened');
-            }
-        );
-    }
-
-
     loadGLTF(){
 
         // Set asset path
-        const loader = new GLTFLoader( ).setPath('../../assets/gltf/cube-room/');
+        const loader = new GLTFLoader( ).setPath('../../assets/gltf/cave/');
         const self = this;
 		
 		// Load a glTF resource
 		loader.load(
 
 			// resource URL
-			"cube-room.gltf",
+			"cave.gltf",
 			// called when the resource is loaded
 			function ( gltf ) {
                 
                 self.space = gltf.scene;
 
+                // Change Position
                 // gltf.scene.position.set(0,0,0);
-                // gltf.scene.scale.set(0.1,0.1,0.1);
+                // Change Rotation
+                // gltf.scene.position.set(0,0,0);
+                // Change Scale
+                // gltf.scene.scale.set(1,1,1);
                 
 				self.scene.add( gltf.scene );
                 
@@ -212,8 +163,6 @@ class App {
             },
 			// called while loading is progressing
 			function ( xhr ) {
-
-				// self.loadingBar.progress = (xhr.loaded / xhr.total);
 				
 			},
 			// called when loading has errors

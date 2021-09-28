@@ -42,15 +42,15 @@ class App {
 
         // OBJECTS
         // Define a Box Geometry
-        const geometry = new THREE.BoxBufferGeometry();
+        // const geometry = new THREE.BoxBufferGeometry();
         // Define a basic material with color Red
-        const material = new THREE.MeshStandardMaterial({ color: 0x00FF00 });
+        // const material = new THREE.MeshStandardMaterial({ color: 0x00FF00 });
         // Create a new mesh using the geometry and material
-        this.mesh = new THREE.Mesh(geometry, material);
+        // this.mesh = new THREE.Mesh(geometry, material);
         // Move the mesh to a new position
-        this.mesh.position.set(0, 1, -3);
+        // this.mesh.position.set(0, 1, -3);
         // Add the mesh to the scene
-        this.scene.add(this.mesh);
+        // this.scene.add(this.mesh);
 
         /*
          *   CAMERA
@@ -112,7 +112,6 @@ class App {
 
         // Initialize Scene from JSON
         this.initScene();
-        this.setupXR();
 
         // Window resize handler
         window.addEventListener('resize', this.resize.bind(this));
@@ -120,10 +119,11 @@ class App {
     }
 
     initScene() {
-        // Creates a loading bar
-        this.loadingBar = new LoadingBar();
-        // Starts the JSON loader        
-        this.loadSceneFromJSON();
+
+        // All the steps that need to be done for the scene to start are included here.
+        this.loadGLTF();
+        this.setupXR();
+
     }
 
  
@@ -215,48 +215,46 @@ class App {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
-    // Load Scene from JSON
-    // Create a scene over at three.js/editor
-    // And export the scene as a JSON
-    loadSceneFromJSON() {
+    loadGLTF(){
 
-        // Set the path of the folder containing the assets
-        const loader = new THREE.ObjectLoader().setPath('../../assets/json/');;
-
-        // Set a reference to the current app
+        // Set asset path
+        const loader = new GLTFLoader( ).setPath('../../assets/gltf/cave/');
         const self = this;
+		
+		// Load a glTF resource
+		loader.load(
 
-        loader.load(
-            // Enter the name of the file here
-            "random.json",
+			// resource URL
+			"cave.gltf",
+			// called when the resource is loaded
+			function ( gltf ) {
+                
+                self.space = gltf.scene;
 
-            // onLoad callback
-            // Here the loaded data is assumed to be an object
-            function (obj) {
-
-                self.jsonscene = obj;
-
-                // obj.position.set(0,1,-3);
-                // obj.scale.set(1,1,1);
-
-                // Add the object to the scene
-                self.scene.add(obj);
-
-                // Disable the loading bar
-                self.loadingBar.visible = false;
-
+                // Change Position
+                // gltf.scene.position.set(0,0,0);
+                // Change Rotation
+                // gltf.scene.position.set(0,0,0);
+                // Change Scale
+                // gltf.scene.scale.set(1,1,1);
+                
+				self.scene.add( gltf.scene );
+                
+                // self.loadingBar.visible = false;
+                self.setupXR();
+				
             },
+			// called while loading is progressing
+			function ( xhr ) {
+				
+			},
+			// called when loading has errors
+			function ( error ) {
 
-            // onProgress callback
-            function (xhr) {
-                // XHR gives us an estimate of the loading progress
-                self.loadingBar.progress = (xhr.loaded / xhr.total);
-            },
+				console.log( 'An error happened' );
 
-            // onError callback
-            function (err) {
-                console.error('An error happened');
-            }
+
+			}  
         );
     }
 }

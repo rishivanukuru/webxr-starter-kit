@@ -96,6 +96,9 @@ class App {
         this.stats = new Stats();
         document.body.appendChild(this.stats.dom);
 
+        // Creates a loading bar
+        this.loadingBar = new LoadingBar();
+
         /*
          *  MAIN FUNCTION CALL
          */
@@ -111,10 +114,12 @@ class App {
     }
 
     initScene() {
-        // Creates a loading bar
-        this.loadingBar = new LoadingBar();
+
+        // All the steps that need to be done for the scene to start are included here.
+
         // Starts the JSON loader        
         this.loadSceneFromJSON();
+
     }
 
     setupXR() {
@@ -156,7 +161,7 @@ class App {
 
         loader.load(
             // Enter the name of the file here
-            "random.json",
+            "testscene.json",
 
             // onLoad callback
             // Here the loaded data is assumed to be an object
@@ -164,7 +169,13 @@ class App {
 
                 self.jsonscene = obj;
 
-                // obj.position.set(0,1,-3);
+                // Position in Meters
+                // obj.position.set(0,0,0);
+
+                // Rotation in Radians
+                // obj.rotation.set(0,0,0); 
+                
+                // Object Scale relative to its default size
                 // obj.scale.set(1,1,1);
 
                 // Add the object to the scene

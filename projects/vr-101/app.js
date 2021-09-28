@@ -17,11 +17,11 @@ class App{
 
         // INITIALIZATION
 		this.scene = new THREE.Scene();
-        // Set the scene background color to a grey value.
+        // Set the scene background color to a specific value.
         // 0x is the prefix to denote a Hexadecimal value.
-        this.scene.background = new THREE.Color( 0x00000 );
+        this.scene.background = new THREE.Color( 0x333333 );
 
-        // LIGHTING
+        // LIGHTING 
         // Create an ambient light and add it to the scene.
         // Parameters: Sky color, Ground color, intensity
 		const ambient = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 0.5);
@@ -38,12 +38,13 @@ class App{
 
         // OBJECTS
         // Define a Box Geometry
-        const geometry = new THREE.CylinderBufferGeometry();
-        // Define a basic material with color Red
-        const material = new THREE.MeshPhongMaterial( { color: 0xff0000 });
+        const geometry = new THREE.BoxBufferGeometry();
+        // Define a basic material with a color
+        const material = new THREE.MeshStandardMaterial( { color: 0xff0000 });
         // Create a new mesh using the geometry and material
         this.mesh = new THREE.Mesh( geometry, material );
         // Move the mesh to a new position
+        // It is currently set to 1 meter above ground, and 3 meters in front of the origin.
         this.mesh.position.set(0,1,-3);
         // Add the mesh to the scene
         this.scene.add(this.mesh);
@@ -88,13 +89,20 @@ class App{
         /*
          *  MAIN FUNCTION CALL
          */
-        
-        this.setupXR();
+
+        // Initialize Scene
+        this.initScene();
 
         // Window resize handler
         window.addEventListener('resize', this.resize.bind(this) );
   
 	}	
+
+    initScene()
+    {
+        // All the steps that need to be done for the scene to start are included here.
+        this.setupXR();
+    }
     
     setupXR(){
         // Enable XR
